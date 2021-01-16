@@ -1,25 +1,36 @@
 ﻿@model IEnumerable<myshop.Models.Product>
 
+
 @{
     ViewBag.Title = "Игры";
 }
 
+
 <div class="container">
     <div class="row">
-        
-            @foreach (var item in Model)
-            {<div class="col-md-4">
+        @if (ViewBag.Message != null)
+        {
+            <h1>@ViewBag.Message</h1>
+        }
+        @foreach (var item in Model)
+        {<div class="col-md-4">
                 <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="~/images/holder.svg" alt="Card image cap">
+                    <img class="card-img-top" src="@item.ProductPhotos.Select(c => c.URL).First()"  alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">@item.Name</h5>
                         <p class="card-text">@item.Description</p>
-                        <a asp-action="AddToCart" asp-route-id="@item.Id" asp- class="btn btn-primary"> @item.Price р</a>
+                        <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@item.ProductId" asp- class="btn btn-primary"> @item.Price р</a>
                     </div>
                 </div>
             </div>
-    }
+        }
 
     </div>
 </div>
+
+@if (TempData["notice"] != null)
+{
+
+    <h1>@TempData["notice"]</h1>
+}
 

@@ -9,7 +9,8 @@ namespace myshop.Models
     public class ApplicationContext : DbContext
     {
         public DbSet<Product> Products { get; set; }
-        public DbSet<Cart> Carts { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<ProductPhoto> ProductPhotos { get; set; }
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base (options)
         {

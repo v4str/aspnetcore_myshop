@@ -18,22 +18,12 @@ namespace myshop.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            return View(await db.Products.ToListAsync());
+            var tmp = db.Products.Include(x => x.ProductPhotos);
+            
+            
+            return View(await tmp.ToListAsync());
         }
 
-        public async Task<IActionResult> AddToCart(int? id)
-        {
-            if (string.IsNullOrWhiteSpace(HttpContext.Request.Cookies["SessionGUID"]))
-            {
-                Guid guid = Guid.NewGuid();
-                var cookie = new HttpCookie("SessionGUID");
-                cookie.Value = guid;
-            }
-            else
-            {
-                
-            }
-            return View();
-        }
+        
     }
 }
