@@ -54,7 +54,7 @@ namespace myshop.Controllers
                 customer.Products.Add(product);
                 db.SaveChanges();
 
-           
+                TempData["AddToCart"] = "Товар добавлен в корзину";
                 return RedirectToAction("Index","Products");
 
             }
@@ -65,10 +65,12 @@ namespace myshop.Controllers
                     var customer = db.Customers.Find(HttpContext.Request.Cookies["SessionGUID"]);
                     customer.Products.Add(db.Products.Find(id));
                     db.SaveChanges();
+                    TempData["AddToCart"] = "Товар добавлен в корзину";
+                    return RedirectToAction("Index", "Products");
                 }
                 catch (DbUpdateException)
                 {
-                    TempData["notice"] = "Товар уже есть в корзине";
+                    TempData["Notice"] = "Товар уже есть в корзине";
                     return RedirectToAction("Index", "Products");
                 }
                 
@@ -77,6 +79,25 @@ namespace myshop.Controllers
 
             }
             return RedirectToAction("Index", "Products");
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var tmp = db.Customers.Include(s => s.Products).Where(x => x.CustomerId == HttpContext.Request.Cookies["SessionGUID"]).FirstOrDefault();
+            /* var tmp = from s in db.Customers where s.CustomerId == HttpContext.Request.Cookies["SessionGUID"] select s;*/
+            /*db.Remove(req);
+            db.SaveChanges();*/
+            var res = tmp.Products.Where(x => x.ProductId == id).FirstOrDefault();
+            tmp.Products.Remove(res);
+            db.SaveChanges();
+
+
+            TempData["DeleteFromCart"] = "Товар успешно удален из вашей корзины";
+            return RedirectToAction("Index", "Cart");
         }
     }
 }

@@ -5,6 +5,22 @@
     ViewBag.Title = "Игры";
 }
 
+@if (TempData["Notice"] != null)
+{
+    <div class="alert alert-primary" role="alert">
+        Товар уже есть <a asp-controller="Cart" asp-action="Index" class="alert-link">в корзине</a>.
+    </div>
+
+}
+else if (TempData["AddToCart"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        Товар успешно добавлен <a asp-controller="Cart" asp-action="Index" class="alert-link">в корзину</a>.
+    </div>
+       
+}
+
+
 
 <div class="container">
     <div class="row">
@@ -15,7 +31,7 @@
         @foreach (var item in Model)
         {<div class="col-md-4">
                 <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="@item.ProductPhotos.Select(c => c.URL).First()"  alt="Card image cap">
+                    <img class="card-img-top" src="@item.ProductPhotos.Select(c => c.URL).First()" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">@item.Name</h5>
                         <p class="card-text">@item.Description</p>
@@ -28,9 +44,6 @@
     </div>
 </div>
 
-@if (TempData["notice"] != null)
-{
 
-    <h1>@TempData["notice"]</h1>
-}
+
 
