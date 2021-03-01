@@ -75,10 +75,16 @@ body {
     height: 100%;
 }*/
 .scale {
-    transition: 0.7s; /* Время эффекта */
+    display: inline-block; 
+    overflow: hidden; 
 }
 
-.scale:hover{
-    transform: scale(1.2);
+.scale img {
+    transition: 1s; 
+    display: block; 
+}
+
+.scale img:hover {
+    transform: scale(1.1); 
 }
 
