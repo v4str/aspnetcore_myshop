@@ -1,0 +1,45 @@
+﻿@model myshop.Models.Product
+
+@*<h1>@Model.Name</h1>
+<img src="@Model.ProductPhotos.Select(c => c.URL).First()" />*@
+
+<div class="jumbotron container dark-grey-text mt-5">
+
+    <div class="row wow fadeIn">
+
+        <div class="col-md-6 mb-4">
+            <img src="@Model.ProductPhotos.Select(c => c.URL).First()" class="img-fluid" alt="">
+        </div>
+
+        <div class="col-md-6 mb-4">
+
+            <p class="lead font-weight-bold">@Model.Name</p>
+
+            <p>
+                @Model.LongDescription
+            </p>
+
+            <p>
+                Год выпуска: @Model.Year
+            </p>
+
+            <p>
+                Платформа: @Model.Platform
+            </p>
+            <p>
+                Цена: @Model.Price р.
+            </p>
+
+            <form class="d-flex justify-content-left">
+                <!-- Default input -->
+                <input type="number" min="1" value="1" aria-label="Search" class="form-control" style="width: 100px">
+                <button class="btn btn-primary btn-md my-0 p" type="submit">
+                    Add to cart
+                    <i class="fas fa-shopping-cart ml-1"></i>
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>

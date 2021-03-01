@@ -11,6 +11,9 @@ namespace myshop.Models
         public string Name { get; set; }
         public string Price { get; set; }
         public string Description { get; set; }
+        public int Year { get; set; }
+        public string Platform { get; set; }
+        public string LongDescription { get; set; }
         public List<Customer> Customers { get; set; } = new List<Customer>();
         public List<ProductPhoto> ProductPhotos { get; set; } = new List<ProductPhoto>();
     }

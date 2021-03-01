@@ -24,6 +24,22 @@ namespace myshop.Controllers
             return View(await tmp.ToListAsync());
         }
 
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var game = await db.Products.Include(x => x.ProductPhotos).FirstOrDefaultAsync(m => m.ProductId == id);
+
+            if (game == null)
+            {
+                return NotFound();
+            }
+
+            return View(game);
+        }
         
     }
 }
