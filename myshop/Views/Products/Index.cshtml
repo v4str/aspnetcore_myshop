@@ -30,13 +30,13 @@ else if (TempData["AddToCart"] != null)
         }
         @foreach (var item in Model)
         {<div class="col-md-4">
-                <div class="card" style="width: 18rem;">
+                <div class="card scale" style="width: 18rem;">
                     <a asp-action="Details" asp-route-id="@item.ProductId"> <img class="card-img-top" src="@item.ProductPhotos.Select(c => c.URL).First()" alt="Card image cap"></a>
                     <div class="card-body">
                         <h5  class="card-title"> <a href="#">@item.Name</a> </h5>
                         <p class="card-text">@item.Description</p>
                         <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@item.ProductId" asp- class="btn btn-primary"> @item.Price р</a>
-                        <a  asp- class="btn btn-primary"> Подробнее</a>
+                        @*<a  asp- class="btn btn-primary"> Подробнее</a>*@
                     </div>
                 </div>
             </div>

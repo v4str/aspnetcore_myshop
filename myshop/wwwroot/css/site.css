@@ -74,3 +74,11 @@ body {
     display: block;
     height: 100%;
 }*/
+.scale {
+    transition: 0.7s; /* Время эффекта */
+}
+
+.scale:hover{
+    transform: scale(1.2);
+}
+
